@@ -15,11 +15,15 @@
     "code-review",
     "conventional-commits"
   ],
+  "scripts": {
+    "check": "node scripts/check-manifests.mjs"
+  },
   "files": [
     "plugin.json",
     "index.cjs",
     "commands",
     "skills",
+    "scripts",
     "README.md",
     "LICENSE"
   ],
