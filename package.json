@@ -1,0 +1,32 @@
+{
+  "name": "ship-review",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agent Skills and slash commands that catch boundary, single-source-of-truth, and commit-hygiene defects before review.",
+  "license": "MIT",
+  "author": "DANANGG28",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DANANGG28/ship-review.git"
+  },
+  "keywords": [
+    "agent-skills",
+    "agent-plugins",
+    "code-review",
+    "conventional-commits"
+  ],
+  "files": [
+    "plugin.json",
+    "index.cjs",
+    "commands",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "omp": {
+    "description": "Agent Skills and slash commands for boundary, SSOT, and commit hygiene.",
+    "extensions": [
+      "./index.cjs"
+    ]
+  }
+}
