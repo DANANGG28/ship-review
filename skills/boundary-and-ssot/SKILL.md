@@ -108,11 +108,12 @@ if (nextStage > emailCount) { /* done */ }
 If a literal must be replaced in a string, replace all occurrences or better,
 remove the literal from the string entirely and inject the value structurally.
 
-### 5. Complete the declared domain
+### 5. Complete the declared domain (YAGNI)
 
 If a type declares N values, the implementation handles N, or the type is
 narrowed. Shipping a declared value the code never produces is dead surface
-that a reader will trust and a test will not cover.
+that a reader will trust and a test will not cover. YAGNI: you did not need it
+yet, so do not declare it yet.
 
 ```ts
 export type LeadSegment = "talent" | "agency" | "enterprise"
@@ -168,6 +169,6 @@ See `references/PATTERNS.md` for worked examples drawn from a real review.
 - `as` across a boundary: silent corruption. Parse or guard.
 - Rule copied into a second path: guaranteed divergence. Extract it.
 - Magic count/range/key: three places to forget. Name it.
-- Enum value declared, never produced: dead surface. Implement or narrow.
+- Enum value declared, never produced (YAGNI): dead surface. Implement or narrow.
 - Optional upstream, required downstream: unusable feature. Mirror it.
 - New branch without a test: unknown behavior. Cover it.
