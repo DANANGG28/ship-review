@@ -25,6 +25,14 @@ a folder with `SKILL.md` and `name` plus `description` frontmatter.
 before it scans sibling directories. It registers no behavior. A host that reads `plugin.json` and
 `skills/` directly ignores it.
 
+`plugin.json` and `package.json` cannot derive from each other, so `name`, `version`, `description`,
+and `license` are duplicated by necessity. `npm run check` is the single invariant that keeps them
+from drifting:
+
+```bash
+npm run check    # fails on any mismatch between the two manifests
+```
+
 ## Install
 
 Portable (any host with Agent Skills support): copy `skills/` into that host's skills directory, or
@@ -131,6 +139,7 @@ ship-review/
 │   ├── ship-review.md
 │   ├── boundary.md
 │   └── commit-check.md
+├── scripts/check-manifests.mjs   manifest drift check
 ├── package.json                  oh-my-pi adapter (private)
 ├── index.cjs                     oh-my-pi adapter entry
 ├── README.md
