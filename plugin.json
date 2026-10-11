@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ship-review",
+  "version": "1.0.0",
+  "description": "Agent Skills that catch boundary, single-source-of-truth, and commit-hygiene defects before review.",
+  "author": {
+    "name": "DANANGG28",
+    "url": "https://github.com/DANANGG28"
+  },
+  "homepage": "https://github.com/DANANGG28/ship-review",
+  "repository": "https://github.com/DANANGG28/ship-review",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "agent-plugins",
+    "code-review",
+    "conventional-commits"
+  ]
+}
