@@ -93,7 +93,10 @@ a layer boundary. Seven gates:
 2. One rule, one function. A normalization or predicate lives in exactly one place.
 3. Symmetric entry points. Single/bulk, HTTP/job, sync/async run identical rules.
 4. No magic literals. Counts, ranges, thresholds, and keys are named or read from settings.
-5. Complete the declared domain. Every declared enum variant has a producer, or the type is narrowed.
+5. Complete the declared domain, and build no presumptive surface (YAGNI). Every declared variant
+   has a producer, or the type is narrowed; every new abstraction, parameter, field, export, or flag
+   has a current caller. YAGNI covers presumptive capability only, never a test, a guard, or a
+   cleanup.
 6. Propagate across every layer. Domain, schema, migration, repository, IO schema, use case, job,
    and every form agree on required versus optional.
 7. Test the branch you added.

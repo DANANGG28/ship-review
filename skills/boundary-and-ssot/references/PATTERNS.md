@@ -70,7 +70,9 @@ detection. Every reader assumes detection can produce it; no test covers it.
 
 Lesson: a declared value the implementation cannot produce is dead surface.
 Either implement the branch end to end (detection + persistence + UI + test) or
-narrow the type. Do not ship the declaration alone.
+narrow the type. Do not ship the declaration alone. This is YAGNI: a capability
+declared before it is needed is a presumptive feature, and it carries cost of
+build, delay, and carry until someone removes it.
 
 ## 4. Blind cast at the DB boundary
 
@@ -140,6 +142,10 @@ that is the actual remediation — then purge the file from history.
 - Every shared rule lives in one function, called by every path.
 - Every count, range, and key is named or comes from settings, once.
 - Every declared enum value is produced, or the type is narrowed.
+- Every abstraction, parameter, field, export, and flag has a current caller
+  (YAGNI); anything added for a future need is removed until needed.
+- YAGNI is never cited against a test, a guard, or a cleanup: it covers
+  presumptive capability only, not work that makes the code easier to modify.
 - Every field change propagated to schema, migration, repo, IO schema, job, and
   all forms; required/optional mirrored.
 - Every new branch has a test.

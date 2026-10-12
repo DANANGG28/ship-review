@@ -14,7 +14,7 @@ For each gate below, state whether this plan will touch it, and when it does, wr
 - **One rule, one function.** Which predicate, normalization, or validation does this plan introduce? Name the single function that owns it.
 - **Symmetric entry points.** Which paths create or mutate the same entity (single/bulk, HTTP/job, sync/async)? Each must call the shared function.
 - **No magic literals.** Which counts, ranges, thresholds, keys, or strings does this plan hardcode? Name the constant or setting each reads from.
-- **Complete declared domain.** Which enum, union, or status does this plan touch? Every declared variant needs a producer and a test, or narrow the type.
+- **Complete declared domain (YAGNI).** Which enum, union, or status does this plan touch? Every declared variant needs a producer and a test, or narrow the type. Then: which abstraction, parameter, field, export, or flag does this plan add for a need that is not yet real? Name each one's current caller, or drop it from the plan. YAGNI never applies to tests, guards, or cleanup.
 - **Cross-layer propagation.** For each new or changed field, list every layer that must change: domain type, DB schema, migration, repository read/write, IO schema, use case, job, every UI form. State required/optional once and mirror it.
 - **Tests.** Which new branch needs a case? Name the branch and the riskiest input class.
 - **Scope.** What is explicitly out of scope for this plan? Name the changes you will propose rather than land.

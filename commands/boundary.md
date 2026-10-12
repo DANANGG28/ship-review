@@ -12,7 +12,7 @@ Work the skill's gates in order and report only what actually violates one:
 2. One rule, one function: no predicate, normalization, or validation duplicated across paths.
 3. Symmetric entry points: every path that creates or mutates the same entity runs the same shared rules.
 4. No magic literals: counts, ranges, thresholds, and keys named once or read from settings.
-5. Declared domain complete (YAGNI): every enum value has a producer, or the type is narrowed.
+5. Declared domain complete, no presumptive surface (YAGNI): every enum value has a producer (or the type is narrowed), and every new abstraction, parameter, field, export, or flag has a current caller. No caller means delete.
 6. Cross-layer propagation: domain, schema, migration, repository, IO schema, job, and every UI form agree, including required/optional.
 
 For each finding: `path:line` - which gate - what breaks - the concrete input that triggers it - the fix. Order by severity. If a gate passes, say so in one line; do not pad.

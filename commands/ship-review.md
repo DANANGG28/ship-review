@@ -9,7 +9,7 @@ If no target is given, use the current working-tree diff and the branch's commit
 Gates:
 
 1. SSOT across entry points: one shared rule per operation; no duplicated normalization or validation between single/bulk, sync/async, HTTP/job.
-2. Enum and union completeness: every declared variant has a producer and a test, or the type is narrowed.
+2. Enum and union completeness, no presumptive surface (YAGNI): every declared variant has a producer and a test, or the type is narrowed; every new abstraction, parameter, field, export, or flag has a current caller. Cite YAGNI only against presumptive capability, never against a test, a guard, or a cleanup.
 3. Correct layer, no fakes: the fix is in the layer that owns the rule; no regex or magic-string substitution standing in for a structural fix; no lying cast at a boundary.
 4. Boundary validation and existing error taxonomy: parse or guard every external input; reuse the project's typed errors (`badRequest`, domain errors) instead of generic `Error`.
 5. End-to-end reachability: form -> router -> use case -> repository -> DB -> consumer; required/optional mirrored at every hop.

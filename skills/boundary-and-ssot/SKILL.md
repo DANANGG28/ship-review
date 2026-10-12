@@ -108,21 +108,36 @@ if (nextStage > emailCount) { /* done */ }
 If a literal must be replaced in a string, replace all occurrences or better,
 remove the literal from the string entirely and inject the value structurally.
 
-### 5. Complete the declared domain (YAGNI)
+### 5. Complete the declared domain, and build no presumptive surface (YAGNI)
 
-If a type declares N values, the implementation handles N, or the type is
-narrowed. Shipping a declared value the code never produces is dead surface
-that a reader will trust and a test will not cover. YAGNI: you did not need it
-yet, so do not declare it yet.
+YAGNI ("you aren't gonna need it"): do not build a capability before it is
+needed. A *presumptive feature* is any code supporting something not yet
+available for use. It carries four costs: build, delay, carry, and repair. Two
+shapes fail this gate.
+
+**Declared but unproduced.** A type declares N values, the implementation
+handles N, or the type is narrowed. A declared value the code never produces is
+dead surface a reader trusts and a test cannot cover.
 
 ```ts
 export type LeadSegment = "talent" | "agency" | "enterprise"
 ```
 
-If the detector only ever returns `talent` and `enterprise`, either implement
-`agency` end-to-end (detection + storage + UI + test) or drop it from the
-type. Do not leave it declared and unimplemented. Same for status enums,
-stage unions, and reason codes.
+If the detector only returns `talent` and `enterprise`, either implement
+`agency` end to end (detection + storage + UI + test) or drop it from the type.
+Same for status enums, stage unions, and reason codes.
+
+**Speculative generality.** Abstractions, parameters, fields, exports, flags,
+and config knobs added for a future need. The test: does it add complexity now
+for something used later? If yes, delete it until a caller exists. An
+extensibility point that is never used is not free: it is apt to get in the way.
+Any abstraction that makes the code harder to understand for current
+requirements is presumed guilty.
+
+YAGNI does not license a bad codebase. It applies only to capability built for a
+presumptive feature, never to effort that makes the software easier to modify.
+Tests, refactoring, and continuous delivery are enabling practices, not YAGNI
+violations. Never cite YAGNI to skip a guard, a test, or a cleanup.
 
 ### 6. Propagate across every layer
 
@@ -161,6 +176,8 @@ Do not delete or weaken an existing test to make a change pass.
    -> read back -> guard -> consumer. Every hop agrees.
 3. Run the changed path. A comment saying it compiles is not evidence.
 4. Grep for the old inline copies; they must be gone, not deprecated.
+5. For every new abstraction, parameter, field, export, or flag, name its
+   current caller. No caller means remove it.
 
 See `references/PATTERNS.md` for worked examples drawn from a real review.
 
@@ -169,6 +186,11 @@ See `references/PATTERNS.md` for worked examples drawn from a real review.
 - `as` across a boundary: silent corruption. Parse or guard.
 - Rule copied into a second path: guaranteed divergence. Extract it.
 - Magic count/range/key: three places to forget. Name it.
-- Enum value declared, never produced (YAGNI): dead surface. Implement or narrow.
+- Declared capability, no producer (YAGNI): dead surface. Implement or narrow.
+- Abstraction, parameter, or flag with no current caller (YAGNI): presumed
+  guilty. Delete it until the caller exists.
+- "We will need it later" as the only reason (YAGNI): you pay carry now. Wait.
+- YAGNI invoked to skip a test, a guard, or a cleanup: wrong principle. YAGNI
+  never covers work that makes the code easier to modify.
 - Optional upstream, required downstream: unusable feature. Mirror it.
 - New branch without a test: unknown behavior. Cover it.
